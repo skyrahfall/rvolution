@@ -1,6 +1,6 @@
 __title__ = "rvolution"
 __license__ = "MIT"
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 import requests
 import re
@@ -53,7 +53,6 @@ class RVolutionPlayer():
 	def __parse_rvideo(self, status):
 			self._rvideo_state = status.get('ErrorCode','undefined')
 			self._last_media = status.get('Media',DEFAULT_MEDIA_TITLE)
-			return True
 	def __send_ir_code(self, code):
 		self.__send_command('ir_code', { 'ir_code': code })
 		return self.update_state()
@@ -86,12 +85,9 @@ class RVolutionPlayer():
 			return {}
 
 		if r.status_code == 200:
-			rStatus = self.__parse_rvideo(r.json())
-			# if "command_status" in tStatus and tStatus["command_status"] == "ok":
-			logging.warning(rStatus)
-			return rStatus
+			self.__parse_rvideo(r.json())
 		else:
-			return {}
+			raise RuntimeError({"status": r.status_code, "text":r.reason})
 	def __send_command(self, cmd, params = {}):
 		params["cmd"] = cmd
 		try:

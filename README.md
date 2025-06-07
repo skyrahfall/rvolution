@@ -42,3 +42,16 @@ I also tried using WakeOnLan but without success.
 
 ## limited test devices
 I only can test it with my R_Volution PlayerOne 8K.
+
+# open
+
+## Tests
+TBD
+
+## Error handling
+like holodeck safty protocols - more of a thoght experiment, than real
+
+## R_Video App API
+it is possible to query a second API from the R_Video app to retrive information on last media played/currently playing.
+I'm tinkering with it, there is already an `_last_media` in the returnd object:
+![Alt-Text](/screenshots/last_media.png)
