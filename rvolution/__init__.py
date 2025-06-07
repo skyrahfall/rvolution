@@ -1,6 +1,6 @@
 __title__ = "rvolution"
 __license__ = "MIT"
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 import requests
 import re
