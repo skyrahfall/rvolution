@@ -51,8 +51,14 @@ class RVolutionPlayer():
 				logging.debug("{}\t:{}".format(val[0], val[1]) )
 		return self._lastState
 	def __parse_rvideo(self, status):
-			self._rvideo_state = status.get('ErrorCode','undefined')
-			self._last_media = status.get('Media',DEFAULT_MEDIA_TITLE)
+		if status.get('ErrorCode'):
+			self._rvideo_state = status.get('ErrorCode')
+		else:
+			self._rvideo_state = "not running"
+		if status.get('Media'):
+			self._last_media = status.get('Media')
+		else:
+			self._last_media = DEFAULT_MEDIA_TITLE
 	def __send_ir_code(self, code):
 		self.__send_command('ir_code', { 'ir_code': code })
 		return self.update_state()
